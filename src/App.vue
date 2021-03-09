@@ -1,9 +1,17 @@
 <template>
 <div>
-  <h2>啦啦啦</h2>
+  <router-view></router-view>
 </div>
 </template>
 
-<style lang="stylus">
+<script>
 
+export default {
+  name: 'App',
+};
+
+</script>
+
+<style lang="stylus">
+@import url('assets/css/base.css');
 </style>

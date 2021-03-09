@@ -5,6 +5,36 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/login',
+  },
+  {
+    path: '/register',
+    component: () => import(/* webpackChunkName: "register" */ 'components/register/registerIndex'),
+  },
+  {
+    path: '/login',
+    component: () => import(/* webpackChunkName: "loginindex" */ 'components/login/loginIndex'),
+  },
+  {
+    path: '/student',
+    component: () => import(/* webpackChunkName: "studentIndex" */ 'components/student/studentIndex'),
+  },
+  {
+    path: '/teacher',
+    component: () => import(/* webpackChunkName: "teacher" */ 'components/teacher/teacherIndex'),
+  },
+  {
+    path: '/admin',
+    component: () => import(/* webpackChunkName: "admin" */ 'components/admin/adminIndex'),
+  },
+  // {
+  //   path: '/login',
+  //   components:{
+  //
+  //   }
+  // },
   // {
   //   path: '/',
   //   name: 'Home',
