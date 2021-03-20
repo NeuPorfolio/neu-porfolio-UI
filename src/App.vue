@@ -13,5 +13,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import url('assets/css/base.css');
+@import "assets/css/base.styl"
+@import "assets/css/common.styl";
 </style>

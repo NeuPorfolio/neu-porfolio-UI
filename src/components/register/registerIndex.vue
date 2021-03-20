@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="backgroud">
     <h2>注册页面</h2>
+    <button @click="$router.back()">返回</button>
   </div>
 </template>
 
@@ -11,11 +12,11 @@ export default {
   data() {
     return {
       baseInfo: {
+        phone: null,
         name: null,
         sex: null,
         mail: null,
         isstudent: true,
-
       },
     };
   },
@@ -23,5 +24,10 @@ export default {
 </script>
 
 <style scoped>
-
+.backgroud{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,179,138,1);
+}
 </style>

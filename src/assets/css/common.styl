@@ -1,0 +1,23 @@
+.flex {
+    display: flex;
+}
+
+.button_to_a {
+    @extends .a;
+    border none;
+    background: none;
+    outline: none;
+    //font-size: 20px;
+    //color: #666666;
+    border-bottom-style: solid;
+    border-bottom-width: 1px ;
+    border-bottom-color: transparent;
+}
+
+button.button_to_a:hover{
+    @extends .ahover;
+    //color: #555555;
+    //border-bottom-style: solid;
+    //border-bottom-color: #555555;
+    cursor:pointer;
+}

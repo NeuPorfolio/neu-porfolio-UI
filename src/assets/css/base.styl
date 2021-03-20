@@ -24,12 +24,13 @@ address, caption, cite, code, dfn, em, strong, th, var {
     font-weight: normal;
 }
 
-a {
+a,.a {
     color: #555;
     text-decoration: none;
+    font-size 16px;
 }
 
-a:hover {
+a:hover,.ahover {
     text-decoration: underline;
 }
 
@@ -51,16 +52,4 @@ table {
 
 html {
     overflow-y: scroll;
-}
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-.clearfix {
-    *zoom: 1;
 }
