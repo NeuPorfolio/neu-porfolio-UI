@@ -13,6 +13,9 @@ export default {
 </script>
 
 <style lang="stylus">
-@import "assets/css/base.styl"
-@import "assets/css/common.styl";
+@import "./assets/css/common/base.styl"
+@import "./assets/css/common/common.styl"
+//* {
+//  transition .3s ease-in-out;
+//}
 </style>

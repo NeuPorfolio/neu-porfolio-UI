@@ -2,17 +2,16 @@
 <div>
   <div class="backgroud"/>
   <div class="wrap box flex">
-      <form class="mainbox flex" name="login" action="#" @submit.prevent="loginsubmit">
+      <form  class="mainbox flex" name="login" action="#" @submit.prevent="()=>false" @keydown.enter.prevent="loginsubmit">
         <div class="tittle">{{title}}</div>
-        <input name="name" type="text" id="name" placeholder="请输入常用手机号/邮箱" v-model.lazy="logindata.name">
+        <input name="email" type="text" id="email" placeholder="请输入常用手机号/邮箱" v-model="logindata.email">
         <input name="password" type="password" id="password" placeholder="请输入密码" v-model="logindata.password">
-        <div class="message" v-show="verify.isError">{{verify.message}}</div>
+        <div class="message" v-if="loginVerify.isError">{{ loginVerify.message }}</div>
         <div class="flex forget">
           <button class="button_to_a" @click="$router.push('register')">点击注册</button>
           <button class="button_to_a" >忘记密码?</button>
         </div>
-
-        <input type="submit" value="登录">
+        <input type="submit" @click="loginsubmit" value="登录">
       </form>
   </div>
 </div>
@@ -22,14 +21,14 @@
 export default {
   name: 'loginIndex',
   methods: {
-    // todo 登录判断及提交
+    // todo 登录判断及提交(网络)
     loginsubmit() {
-      console.log(this.logindata.name + this.logindata.password);
-      this.verify = {
+      console.log(`提交：${this.logindata.email}${this.logindata.password}`);
+      this.loginVerify = {
         isError: true,
         message: '密码错误！',
       };
-      switch (this.logindata.name) {
+      switch (this.logindata.email) {
         case 'student':
           this.$router.push('/student'); break;
         case 'teacher':
@@ -44,10 +43,10 @@ export default {
     return {
       title: 'NeuPorfolio',
       logindata: {
-        name: null,
+        email: null,
         password: null,
       },
-      verify: {
+      loginVerify: {
         isError: false,
         message: '',
       },
@@ -57,6 +56,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~assets/css/login/login-common.styl"
 .backgroud{
   position: absolute;
   height: 50%;
@@ -94,8 +94,8 @@ export default {
   font-size: 14px;
 }
 .mainbox input[type="text"]{
-  padding: 8px 0px;
-  margin: 10px 0px;
+  padding: 8px 0;
+  margin: 10px 0;
   width: 310px;
   font-size: 14px;
   color: rgba(166, 166, 166, 1);
@@ -108,13 +108,13 @@ export default {
 }
 .mainbox input[type="password"] {
   @extend .mainbox input[type="text"];
-  margin-bottom 0px;
+  margin-bottom 0;
 }
 .mainbox input[type="submit"]{
   position: relative;
   top: 18px;
-  padding: 15px 0px;
-  margin: 0px 0px 0px 0px;
+  padding: 15px 0;
+  margin: 0;
   letter-spacing: 5px;
   /*width: 300px;*/
   background-color: rgba(0, 179, 138, 1);
@@ -124,6 +124,5 @@ export default {
 }
 .message {
   color: red;
-
 }
 </style>

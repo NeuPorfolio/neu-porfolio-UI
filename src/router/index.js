@@ -10,24 +10,29 @@ const routes = [
     redirect: '/login',
   },
   {
-    path: '/register',
-    component: () => import(/* webpackChunkName: "register" */ 'components/register/registerIndex'),
+    path: '/login',
+    component: () => import(/* webpackChunkName: "loginindex" */ 'views/login/loginIndex'),
   },
   {
-    path: '/login',
-    component: () => import(/* webpackChunkName: "loginindex" */ 'components/login/loginIndex'),
+    path: '/register',
+    component: () => import(/* webpackChunkName: "register" */ 'views/register/registerIndex'),
+  },
+
+  {
+    path: '/selectclass',
+    component: () => import(/* webpackChunkName: "selectclass" */'views/register/selectclass'),
   },
   {
     path: '/student',
-    component: () => import(/* webpackChunkName: "studentIndex" */ 'components/student/studentIndex'),
+    component: () => import(/* webpackChunkName: "studentIndex" */ 'views/student/studentIndex'),
   },
   {
     path: '/teacher',
-    component: () => import(/* webpackChunkName: "teacher" */ 'components/teacher/teacherIndex'),
+    component: () => import(/* webpackChunkName: "teacher" */ 'views/teacher/teacherIndex'),
   },
   {
     path: '/admin',
-    component: () => import(/* webpackChunkName: "admin" */ 'components/admin/adminIndex'),
+    component: () => import(/* webpackChunkName: "admin" */ 'views/admin/adminIndex'),
   },
   // {
   //   path: '/login',
