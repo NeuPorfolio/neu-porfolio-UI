@@ -6,8 +6,10 @@
         <img src="https://img.xiaopiu.com/userImages/img328164da748e08.jpeg" alt="head">
       </div>
       <form  action="#" class="mainbox flex" @submit.prevent="()=>false" @keydown.enter.prevent="registersubmit()">
-        <input-text type="text" name="nick" v-model="baseInfo.nick" placeholder="请输入昵称" @blur="isLegalNick" ref="nick"></input-text>
-        <input-text type="text" name="email" placeholder="请输入邮箱" v-model="baseInfo.email" @blur="isLegalEmail" ref="email"></input-text>
+        <input-text type="text" name="nick" v-model="baseInfo.nick" placeholder="昵称" @blur="isLegalNick" ref="nick"></input-text>
+        <input-text type="text" name="email" placeholder="邮箱" v-model="baseInfo.email" @blur="isLegalEmail" ref="email"></input-text>
+        <input-text type="password" name="password1" placeholder="密码" v-model="passwords.password1" @blur="password1Verify" ref="password1"></input-text>
+        <input-text type="password" name="password2" placeholder="重复密码" v-model="passwords.password2" @blur="password1Verify" ref="password2"></input-text>
         <input-radio v-model="baseInfo.sex" v-bind:options="['男', '女']"></input-radio>
         <input class="submitinput" type="submit" @click="registersubmit()" value="注册">
       </form>
@@ -33,8 +35,12 @@ export default {
         nick: null,
         sex: null,
         email: null,
-        isStudent: null,
-        passwd: null,
+        password: null,
+      },
+      // 名称是否合法
+      passwords: {
+        password1: null,
+        password2: null,
       },
       // todo 服务器返回的验证信息
       registerVerify: {
@@ -50,6 +56,7 @@ export default {
     };
   },
   methods: {
+    // 验证昵称
     isLegalNick() {
       if (!this.baseInfo.nick) {
         this.$refs.nick.showAlert('昵称不能为空');
@@ -57,6 +64,7 @@ export default {
         this.$refs.nick.hideAlert();
       }
     },
+    // 验证邮箱
     isLegalEmail() {
       const reger = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{1,5})$/;
       if (!this.baseInfo.email) {
@@ -67,13 +75,28 @@ export default {
         this.$refs.email.hideAlert();
       }
     },
+    // 验证密码
+    password1Verify() {
+      if (!this.passwords.password1) {
+        this.$refs.password1.showAlert('密码不能为空！');
+      } else {
+        this.$refs.password1.hideAlert();
+      }
+      if (this.passwords.password1 !== this.passwords.password2) {
+        this.$refs.password2.showAlert('密码不一致！');
+      } else {
+        this.$refs.password2.hideAlert();
+        this.baseInfo.password = this.passwords.password2;
+      }
+    },
     // todo 修改为网络提交及验证
     registersubmit() {
-      if (this.matchMail && this.baseInfo.nick && this.baseInfo.sex && this.baseInfo.email && this.baseInfo.isstudent) {
+      if (this.baseInfo.nick && this.baseInfo.sex && this.baseInfo.email && this.baseInfo.password) {
         console.log('提交');
         console.log(this.baseInfo);
       } else {
         console.log('验证失败');
+        console.log(this.baseInfo);
       }
     },
   },
@@ -94,7 +117,9 @@ export default {
 }
 .box {
   background-color white;
-  padding 20px;
+  padding 18px;
+  border-radius 5px;
+  box-shadow 3px;
 }
 .imgbox {
   width:58px;

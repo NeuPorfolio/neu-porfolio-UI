@@ -39,7 +39,7 @@ export default {
 
 <style scoped lang="stylus">
 .textmain-hideAlert {
-  margin: 2px 0 18px 0;
+  margin: 2px 0 16px 0;
 }
 .textmain-showAlert {
   margin: 2px 0 0 0;
@@ -48,10 +48,10 @@ export default {
   background-color: rgba(246, 246, 246, 1);
   outline-style: none;
   border: none;
-  padding: 10px 0;
+  padding: 8px 0;
   width: 300px;
   font-size: 15px;
-  text-indent: 10px;
+  text-indent: 15px;
 }
 .textverify {
   color red;
