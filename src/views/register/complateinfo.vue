@@ -1,17 +1,12 @@
 <template>
   <div class="background wrap flex">
     <div class="box">
-      <p>请填写基本信息</p>
+      <p>请完善信息</p>
       <div class="imgbox">
         <img src="https://img.xiaopiu.com/userImages/img328164da748e08.jpeg" alt="head">
       </div>
       <form  action="#" class="mainbox flex" @submit.prevent="()=>false" @keydown.enter.prevent="registersubmit()">
         <input-text type="text" name="nick" v-model="baseInfo.nick" placeholder="昵称" @blur="isLegalNick" ref="nick"></input-text>
-        <input-text type="text" name="email" placeholder="邮箱" v-model="baseInfo.email" @blur="isLegalEmail" ref="email"></input-text>
-        <input-text type="password" name="password1" placeholder="密码" v-model="passwords.password1" @blur="password1Verify" ref="password1"></input-text>
-        <input-text type="password" name="password2" placeholder="重复密码" v-model="passwords.password2" @blur="password1Verify" ref="password2"></input-text>
-        <input-radio v-model="baseInfo.sex" v-bind:options="['男', '女']"></input-radio>
-        <input-radio v-model="baseInfo.role" v-bind:options="['教师', '学生']"></input-radio>
         <input class="submitinput" type="submit" @click="registersubmit()" value="注册">
       </form>
     </div>
@@ -23,21 +18,18 @@
         <div class="dialogMain">{{dialog.message}}</div>
       </template>
     </dialog-box>
-  </div>
-
+    </div>
 </template>
 
 <script>
-// todo 在baseInfo子组件点击下一步, 发送事件到父组件, 父组件执行函数,存入数据
 import inputText from 'components/register/inputText.vue';
-import InputRadio from 'components/register/inputRadio.vue';
 import DialogBox from 'components/common/dialogBox.vue';
+import request from '@/network/request';
 
 export default {
-  name: 'registerIndex',
+  name: 'complateinfo',
   components: {
     DialogBox,
-    InputRadio,
     inputText,
   },
   data() {
@@ -112,23 +104,35 @@ export default {
     },
     // todo 修改为网络提交及验证
     registersubmit() {
-      if (this.baseInfo.nick && this.baseInfo.sex && this.baseInfo.email && this.baseInfo.password) {
-        // todo 添加网络请求逻辑
-        this.$router.push({
-          name: 'complateinfo',
-        });
-      } else {
-        console.log('验证失败');
-        console.log(this.baseInfo);
-        this.dialog.isShow = true;
-        this.dialog.message = '验证失败';
-      }
+      request({
+        url: '/complete',
+        method: 'post',
+        data: {
+          nick: 'wlnxing',
+        },
+      }).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
+
+      // if (this.baseInfo.nick && this.baseInfo.sex && this.baseInfo.email && this.baseInfo.password) {
+      //   // todo 添加网络请求逻辑
+      //   this.$router.push({
+      //     name: 'selectclass',
+      //   });
+      // } else {
+      //   console.log('验证失败');
+      //   console.log(this.baseInfo);
+      //   this.dialog.isShow = true;
+      //   this.dialog.message = '验证失败';
+      // }
     },
   },
 };
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus" scoped>
 @import "~assets/css/login/login-common.styl"
 
 .background{

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="backgroud"/>
+  <div class="background"/>
   <div class="wrap box flex">
       <form  class="mainbox flex" name="login" action="#" @submit.prevent="()=>false" @keydown.enter.prevent="loginsubmit">
         <div class="tittle">{{title}}</div>
@@ -18,22 +18,55 @@
 </template>
 
 <script>
+// import request from '@/network/request';
+
 export default {
   name: 'loginIndex',
   methods: {
     // todo 登录判断及提交(网络)
-    loginsubmit() {
+    async loginsubmit() {
       console.log(`提交：${this.logindata.email}${this.logindata.password}`);
+      // request({
+      //   url: '/login',
+      //   method: 'post',
+      //   data: {
+      //     username: this.logindata.email,
+      //     password: this.logindata.password,
+      //   },
+      // }).then((res) => {
+      //   console.log(res.iscomplete);
+      //   if (!res.iscomplete) {
+      //     this.$router.push('/complateinfo');
+      //     return;
+      //   }
+      //   if (res.identity === 'student') {
+      //     this.$router.push('/student');
+      //     return;
+      //   }
+      //   if (res.identity === 'teacher') {
+      //     this.$router.push('/teacher');
+      //   }
+      // }).catch((err) => {
+      //   if (err.status === 403) {
+      //     this.loginVerify = {
+      //       isError: true,
+      //       message: '密码错误',
+      //     };
+      //   }
+      // });
       this.loginVerify = {
         isError: true,
         message: '密码错误！',
       };
       switch (this.logindata.email) {
         case 'student':
+          this.$notify.success('欢迎同学！');
           this.$router.push('/student'); break;
         case 'teacher':
+          this.$notify.success('欢迎老师！');
           this.$router.push('/teacher'); break;
         case 'admin':
+          this.$notify.success('欢迎管理员！');
           this.$router.push('/admin'); break;
         default:
       }
@@ -57,7 +90,7 @@ export default {
 
 <style scoped lang="stylus">
 @import "~assets/css/login/login-common.styl"
-.backgroud{
+.background{
   position: absolute;
   height: 50%;
   width: 100%;

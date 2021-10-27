@@ -1,5 +1,5 @@
 <template>
-<div class="flex flex_space-between">
+<div class="flex flex_space-between radiomain">
     <div class="radio flex flex_space-between" v-for="(item, index) in options" :key="index" @click="selecter(typeof item == 'string' ? item : item.value)">
       <label >{{typeof item == 'string' ? item : item.label}}</label>
       <input type="radio" :value="typeof item == 'string' ? item : item.value" v-model="selectedValue"
@@ -33,7 +33,7 @@ export default {
 
 <style scoped lang="stylus">
 .radiomain {
-  margin: 8px 0;
+  margin: 2px 0 16px 0;
 }
 .radio{
   width 130px;
